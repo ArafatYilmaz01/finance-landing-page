@@ -1,0 +1,51 @@
+@use '/src/style/variable';
+
+.card-section {
+    background-color: variable.$light-bg;
+    margin-top: 4rem;
+
+    .card-row {
+        flex-wrap: wrap;
+
+        @media only screen and (max-width: variable.$medium) {
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    }
+
+    .card {
+        border-radius: 20px;
+        background: #fff;
+        max-width: 350px;
+        padding: 3rem 2rem 1rem 2rem;
+        box-shadow: 2px 1px 9px 0px rgb(0, 0, 0, 20%);
+        transition: .2s all ease;
+
+        @media only screen and (max-width: variable.$xs) {
+            padding: 1rem;
+        }
+
+        & + .card {
+            @media only screen and (max-width: variable.$medium) {
+                margin-top: 2rem;   
+            }
+        }
+        
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        h4 {
+            color: variable.$dark-primary;
+            font-size: 28px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            margin-top: 3rem;
+        }
+
+        p {
+            padding: 0 1rem;
+        }
+    }
+}

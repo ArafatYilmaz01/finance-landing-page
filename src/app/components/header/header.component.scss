@@ -1,0 +1,10 @@
+@use '/src/style/variable';
+
+.logo {
+    max-width: 300px;
+    cursor: pointer;
+
+    @media only screen and (max-width: variable.$xs) {
+        max-width: 200px;
+    }
+}

@@ -1,0 +1,91 @@
+<!--hero banner component-->
+<app-hero-banner></app-hero-banner>
+
+<!--cards components-->
+<app-cards></app-cards>
+
+<!--converter component-->
+<section class="convert-fund py-5 mb-3">
+    <div class="container py-3">
+        <div class="flex-panel flex-v-center header-row">
+            <img src="assets/images/convert-icon.svg" alt="convert-icon">
+            <h3 class="font-bold">Convert Fund</h3>
+        </div><!--end flex panel-->
+
+        <div class="wrapper flex-panel flex-justify-between">
+            <div class="amount">
+                <label for="amount" class="font-bold label">Amount</label>
+                <input [(ngModel)]="amount" type="number" class="form-control input-control" name="amount">
+            </div><!--end amount input-->
+
+
+            <!--from country select box-->
+            <div class="dropdown">
+                <label class="font-bold label">From</label>
+                <button [dropdownTriggerFor]="dropdown" class="dropdown-btn" (click)="calculateDropdownWidth()">
+                    <span class="flex-panel flex-v-center" *ngIf="fromSelectedCountry; else noCountrySelectedTemplate;">
+                        <img class="flag" [src]="'assets/images/flag/' + fromSelectedCountry.code + '.svg' " [alt]="fromSelectedCountry.code"> {{fromSelectedCountry.code}} - {{fromSelectedCountry.unit}}
+                    </span> 
+
+                    <ng-template #noCountrySelectedTemplate>Select country</ng-template>
+                    
+
+                    <img src="assets/images/down-arrow.svg" alt="down-arrow" class="arrow">
+                </button>
+              
+                <easy-dropdown #dropdown>
+                    <ng-container *ngFor="let currency of validFromCurrencyList;">
+                        <div (click)="onFromSelect(currency)" class="dropdown-item flex-panel flex-v-center">
+                            <img [src]="'assets/images/flag/' + currency.code + '.svg' " [alt]="currency.code"> {{currency.code}} - {{currency.unit}}
+                        </div>
+                    </ng-container>
+                </easy-dropdown>
+            </div><!--end dropdown-->
+
+            <img src="assets/images/exchance_icon.svg" alt="convert-icon" class="convert-icon">
+
+             <!--to country select box-->
+             <div class="dropdown">
+                <label class="font-bold label">To</label>
+                <button [dropdownTriggerFor]="dropdownTo" class="dropdown-btn" (click)="calculateDropdownWidth()">
+                    <span class="flex-panel flex-v-center" *ngIf="toSelectedCountry; else noCountrytoSelectedTemplate;">
+                        <img class="flag" [src]="'assets/images/flag/' + toSelectedCountry.code + '.svg' " [alt]="toSelectedCountry.code"> {{toSelectedCountry.code}} -  {{toSelectedCountry.unit}}
+                    </span> 
+
+                    <ng-template #noCountrytoSelectedTemplate>Select country</ng-template>
+                    
+
+                    <img src="assets/images/down-arrow.svg" alt="down-arrow" class="arrow">
+                </button>
+              
+                <easy-dropdown #dropdownTo>
+                    <ng-container *ngFor="let currency of validToCurrencyList;">
+                        <div (click)="onToSelect(currency)" class="dropdown-item flex-panel flex-v-center">
+                            <img [src]="'assets/images/flag/' + currency.code + '.svg' " [alt]="currency.code"> {{currency.code}} - {{currency.unit}}
+                        </div>
+                    </ng-container>
+                </easy-dropdown>
+            </div><!--end dropdown-->
+           
+        </div>
+
+        <div class="flex-panel flex-justify-end mt-2">
+            <button class="btn btn-primary font-med" (click)="calculateResult()" [disabled]="!amount || amount == ' ' || !fromSelectedCountry || !toSelectedCountry">Convert</button>
+        </div><!--end flex panel-->
+
+        <!--calculation result section-->
+        <div class="result-section mt-2" *ngIf="showResultSection && amount && fromSelectedCountry && fromSelectedCountry.value && toSelectedCountry && toSelectedCountry.value">
+            <p class="font-bold sub-text">{{amount | number: '1.2-2'}} {{fromSelectedCountry.unit}} = </p>
+
+            <p class="font-bold main-text">
+                {{calculateCurrency(fromSelectedCountry.value, toSelectedCountry.value, amount)}}
+                {{toSelectedCountry.unit}}
+            </p>
+
+            <p class="font-med normal-text">1 {{fromSelectedCountry.code}} = {{calculateCurrency(fromSelectedCountry.value, toSelectedCountry.value, 1)}}    {{toSelectedCountry.code}}</p>
+
+            <p class="font-med normal-text">1 {{toSelectedCountry.code}} = {{calculateCurrency(toSelectedCountry.value, fromSelectedCountry.value, 1)}} {{fromSelectedCountry.code}}</p>
+        </div><!--end flex panel-->
+    </div><!--end container-->
+</section><!--end convert fund-->
+

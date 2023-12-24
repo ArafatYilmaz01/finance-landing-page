@@ -1,0 +1,43 @@
+@use '/src/style/variable';
+
+.hero-banner {
+    .flex-panel {
+        @media only screen and (max-width: variable.$medium) {
+            flex-wrap: wrap;
+        }
+    }
+    .left-section {
+        flex-basis: 50%;
+        max-width: 490px;
+
+        @media only screen and (max-width: variable.$medium) {
+            flex-basis: 100%;
+            text-align: center;
+            margin: auto;
+        }
+
+        h1.banner-heading {
+            font-family: variable.$font-bold;
+            color: variable.$dark-secondary;
+            font-size: 48px;
+            span {
+                display: block;
+            }
+        }
+    }
+
+    .right-section {
+        background: variable.$light-bg;
+        border-radius: 100%;
+        width: 550px;
+        height: 550px;
+
+        @media only screen and (max-width: variable.$medium) {
+            display: none;
+        }
+
+        img {
+            width: 80%;
+        }
+    }
+}

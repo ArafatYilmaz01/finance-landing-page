@@ -1,0 +1,63 @@
+@use '/src/style/variable';
+
+.login-form-section {
+    padding: 2rem 2rem 2rem 2rem;
+
+    @media only screen and (max-width: variable.$xs) {
+        padding: 0rem;
+    }
+
+    .dialog-header {
+        border-bottom: 4px solid variable.$primary;
+        padding-bottom: 2rem;
+
+        @media only screen and (max-width: variable.$xs) {
+            padding-bottom: 1rem;
+        }
+
+        img {
+            max-width: 315px;
+
+            @media only screen and (max-width: variable.$xs) {
+                max-width: 200px;
+            }
+        }
+    }
+
+    .dialog-body {
+        .login-form {
+            h5 {
+                text-align: left;
+                font-size: 28px;
+                color: variable.$dark-primary;
+                margin: 2rem 0rem;
+
+                @media only screen and (max-width: variable.$xs) {
+                    margin: 1rem 0rem;
+                }
+            }
+
+            input {
+                & + input {
+                    margin-top: 1.5rem;
+                }
+                
+            }
+
+            a {
+               color: variable.$secondary;
+               font-size: 14px;
+               cursor: pointer;
+               transition: .2s all ease;
+
+               &:hover {
+                color: variable.$primary;
+               }
+            }
+
+            button.btn {
+                text-transform: uppercase;
+            }   
+        }
+    }
+}
